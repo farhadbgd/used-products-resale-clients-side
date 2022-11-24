@@ -1,6 +1,10 @@
 import React from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import CommingSoon from '../../Shared/CommingSoon';
+import toast from 'react-hot-toast';
+
+import Footer from '../../Shared/Footer';
+import Banner from '../Banner/Banner';
+import CatgoryCard from '../CatgoryCard/CatgoryCard';
+import ExtraSection from '../ExtraSection/ExtraSection';
 
 const Home = () => {
     const tostHandler = () => {
@@ -8,8 +12,13 @@ const Home = () => {
     }
     return (
         <div>
+
+            <Banner></Banner>
+            <CatgoryCard></CatgoryCard>
+            <ExtraSection></ExtraSection>
+            <Footer></Footer>
+
             <button onClick={tostHandler} className="btn">Button</button>
-            <CommingSoon></CommingSoon>
         </div>
     );
 };
