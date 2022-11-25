@@ -14,7 +14,7 @@ const CatergoriesProduct = () => {
             .then(books => console.log(books))
 
 
-        console.log(id);
+        // console.log(id);
     };
 
     return (
@@ -30,7 +30,7 @@ const CatergoriesProduct = () => {
                         <h2 className="card-title">{book.title}</h2>
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <div className="card-actions">
-                            <Link key={book._id} onClick={() => singleProduct(book._id)}><button className="btn btn-primary">Buy Now</button></Link>
+                            <Link to={`/category/${book._id}`} key={book._id} onClick={() => singleProduct(book._id)}><button className="btn btn-primary">Buy Now</button></Link>
                         </div>
                     </div>
                 </div>)

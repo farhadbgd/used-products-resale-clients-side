@@ -35,7 +35,7 @@ const CatgoryCard = () => {
         //     //     refetch();
         //     // }
         // })
-        console.log(category);
+        // console.log(category);
     };
 
 
