@@ -7,9 +7,7 @@ import CatgoryCard from '../CatgoryCard/CatgoryCard';
 import ExtraSection from '../ExtraSection/ExtraSection';
 
 const Home = () => {
-    const tostHandler = () => {
-        toast.success('I have come back')
-    }
+
     return (
         <div>
 
@@ -18,7 +16,6 @@ const Home = () => {
             <ExtraSection></ExtraSection>
             <Footer></Footer>
 
-            <button onClick={tostHandler} className="btn">Button</button>
         </div>
     );
 };

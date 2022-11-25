@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom"
 import CategoriesLayout from "../Layouts/CategoriesLayout"
 import Main from "../Layouts/Main"
-import AddAProduct from "../Pages/AddAProduct/AddAProduct"
 import AddProduct from "../Pages/AddProduct/AddProduct"
 import CatergoriesProduct from "../Pages/CatergoriesProduct/CatergoriesProduct"
 import Login from "../Pages/Signup/Login"
@@ -15,10 +14,7 @@ const router = createBrowserRouter([
         element: <Main></Main>,
         errorElement: < ErrorPage />,
         children: [
-            // {
-            //     path: '/',
-            //     element: <Home />,
-            // },
+
             {
                 path: '/login',
                 element: <Login></Login>,
@@ -28,29 +24,6 @@ const router = createBrowserRouter([
                 element: <Signup></Signup>,
             },
 
-
-            // {
-            //     path: '/all-homes',
-            //     element: <AllHome />,
-            // },
-            // {
-            //     path: '/coming-soon',
-            //     element: <ComingSoon />,
-            // },
-            // {
-            //     path: '/service-details/:id',
-            //     element: <Details />,
-            //     loader: ({ params }) =>
-            //         fetch(`${process.env.REACT_APP_API_URL}/home/${params.id}`),
-            // },
-            // {
-            //     path: '/search-result',
-            //     element: <SearchResult />,
-            // },
-            // {
-            //     path: '/checkout',
-            //     element: <Checkout />,
-            // },
         ],
 
     },
@@ -93,87 +66,21 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/addaproduct',
+        path: '/login',
         element: <CategoriesLayout></CategoriesLayout>,
 
         children: [
 
 
             {
-                path: '/addaproduct',
-                element: <AddAProduct></AddAProduct>,
+                path: '/login',
+                element: <Login></Login>,
             },
         ]
     },
 
 
-    // {
-    //     path: '/dashboard',
-    //     errorElement: <ErrorPage />,
-    //     element: (
-    //         <PrivateRoute>
-    //             <DashboardLayout />
-    //         </PrivateRoute>
-    //     ),
-    //     children: [
-    //         {
-    //             path: '',
-    //             element: (
-    //                 <PrivateRoute>
-    //                     <Welcome />
-    //                 </PrivateRoute>
-    //             ),
-    //         },
-    //         {
-    //             path: 'my-bookings',
-    //             element: (
-    //                 <PrivateRoute>
-    //                     <MyBookings />
-    //                 </PrivateRoute>
-    //             ),
-    //         },
-    //         {
-    //             path: 'become-host',
-    //             element: (
-    //                 <PrivateRoute>
-    //                     <BecomeAHost />
-    //                 </PrivateRoute>
-    //             ),
-    //         },
-    //         {
-    //             path: 'all-users',
-    //             element: (
-    //                 <AdminRoute>
-    //                     <AllUsers />
-    //                 </AdminRoute>
-    //             ),
-    //         },
-    //         {
-    //             path: 'all-bookings',
-    //             element: (
-    //                 <AdminRoute>
-    //                     <AllBookings />
-    //                 </AdminRoute>
-    //             ),
-    //         },
-    //         {
-    //             path: 'add-home',
-    //             element: (
-    //                 <HostRoute>
-    //                     <AddHome />
-    //                 </HostRoute>
-    //             ),
-    //         },
-    //         {
-    //             path: 'manage-homes',
-    //             element: (
-    //                 <HostRoute>
-    //                     <ManageHomes />
-    //                 </HostRoute>
-    //             ),
-    //         },
-    //     ],
-    // },
+
 ])
 
 export default router

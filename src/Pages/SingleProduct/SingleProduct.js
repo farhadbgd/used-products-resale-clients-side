@@ -7,7 +7,7 @@ const SingleProduct = () => {
     const tostHandler = () => {
         toast.success('I have come back')
     }
-    console.log(book)
+
     return (
         <div>
             <div className="card lg:card-side bg-base-100 shadow-xl">

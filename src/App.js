@@ -7,7 +7,7 @@ function App() {
 
 
   return (
-    <div className='max-w-[1280px] mx-auto'>
+    <div className='max-w-[1280px] mx-auto' style={{ fontFamily: 'Verdana, Geneva, Tahoma, sans-serif' }}>
       <RouterProvider router={router}></RouterProvider>
 
     </div>

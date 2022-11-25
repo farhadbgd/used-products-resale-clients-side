@@ -5,14 +5,14 @@ import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStat
 // export const AuthContext = createContext();
 export const AuthContext = createContext()
 const auth = getAuth(app)
-console.log(auth)
+// console.log(auth)
 
 const googleProvider = new GoogleAuthProvider()
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
-    console.log(user)
+    // console.log(user)
     //create user
     const createUser = (email, password) => {
         setLoading(true)

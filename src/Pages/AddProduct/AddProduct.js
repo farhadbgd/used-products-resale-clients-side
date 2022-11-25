@@ -7,29 +7,12 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 // import { AuthContext } from '../../Contex/AuthProvider';
 
 const AddProduct = () => {
-    const [users, setUsers] = useState({})
-    const { createUser, updateUserProfile, verifyEmail, setLoading, signInWithGoogle, loading } = useContext(AuthContext);
-    // const {
-    //     createUser,
-    //     updateUserProfile,
-    //     verifyEmail,
-    //     loading,
-    //     setLoading,
-    //     signInWithGoogle,
-    // } = useContext(AuthContext)
-
-    const navigate = useNavigate()
-    const location = useLocation()
-    const from = location.state?.from?.pathname || '/'
-
+    const [product, setProduct] = useState({})
+    const { loading } = useContext(AuthContext);
     const handleSubmit = event => {
         event.preventDefault()
-        const name = event.target.name.value
 
-        const email = event.target.email.value
-        const password = event.target.password.value
-
-        // Image Upload
+        // image upload to imgbb
         const image = event.target.image.files[0]
         const formData = new FormData()
         formData.append('image', image)
@@ -43,57 +26,36 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(imageData => {
-                const newUser = { ...users };
-                newUser[name] = imageData.data.display_url;
-                console.log(newUser)
-                setUsers(newUser);
-                // setUsers(imageData.data.display_url)
+                const newProduct = { ...product };
+                newProduct['img'] = imageData.data.display_url;
+                setProduct(newProduct);
             })
-
-
-            //     {
-            //     // Create User
-            //     createUser(email, password)
-            //         .then(result => {
-            //             // setAuthToken(result.user)
-            //             updateUserProfile(name, imageData.data.display_url)
-
-            //                 .then(
-            //                     verifyEmail().then(() => {
-            //                         toast.success(
-            //                             'Please check your email for verification link.'
-            //                         )
-            //                         setLoading(false)
-            //                         navigate(from, { replace: true })
-            //                     })
-            //                 )
-            //                 .catch(err => console.log(err))
-            //         })
-
-            //         .catch(err => {
-            //             console.log(err)
-            //             setLoading(false)
-            //         })
-            // })
             .catch(err => console.log(err))
-    }
 
-    const handleGoogleSignin = () => {
-        signInWithGoogle().then(result => {
-            console.log(result.user)
-            // setAuthToken(result.user)
-            setLoading(false)
-            navigate(from, { replace: true })
+        fetch('http://localhost:5000/books', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product),
         })
+            .then(response => response.json())
+            .then(data => {
+                if (data.acknowledged === true) {
+                    toast.success('Your product has been added successfully');
+                }
+                event.target.reset();
+            })
     }
     const handleBlur = (e) => {
         const name = e.target.name;
         const nameValue = e.target.value;
-        const newUser = { ...users };
-        newUser[name] = nameValue;
-        console.log(newUser)
-        setUsers(newUser);
+        const newProduct = { ...product };
+        newProduct[name] = nameValue;
+        console.log(newProduct)
+        setProduct(newProduct);
     }
+
     return (
         <div className='flex justify-center items-center pt-8'>
             <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -111,6 +73,7 @@ const AddProduct = () => {
                             <label htmlFor='email' className='block mb-2 text-sm'></label>
                             <input
                                 onBlur={handleBlur}
+                                required
                                 type='text'
                                 name='name'
                                 id='name'
@@ -120,9 +83,73 @@ const AddProduct = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor='image' className='block mb-2 text-sm'>
-                                Select Image:
-                            </label>
+                            <label htmlFor='email' className='block mb-2 text-sm'></label>
+                            <input
+                                onBlur={handleBlur}
+                                required
+                                type='text'
+                                name='category'
+                                id='category'
+                                placeholder='Enter Category Name'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='email' className='block mb-2 text-sm'></label>
+                            <input
+                                onBlur={handleBlur}
+                                required
+                                type='text'
+                                name='title'
+                                id='title'
+                                placeholder='Enter Book Name'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='email' className='block mb-2 text-sm'></label>
+                            <input
+                                onBlur={handleBlur}
+                                required
+                                type='text'
+                                name='location'
+                                id='location'
+                                placeholder='Enter Your Location'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='email' className='block mb-2 text-sm'></label>
+                            <input
+                                onBlur={handleBlur}
+                                required
+                                type='text'
+                                name='resalePrice'
+                                id='resalePrice'
+                                placeholder='Enter Resale Price'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='email' className='block mb-2 text-sm'></label>
+                            <input
+                                onBlur={handleBlur}
+                                required
+                                type='text'
+                                name='originalPrice'
+                                id='originalPrice'
+                                placeholder='Enter Original Price'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='image' className='block mb-2 text-sm'> </label>
+
                             <input
                                 onBlur={handleBlur}
                                 required
@@ -133,9 +160,9 @@ const AddProduct = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor='email' className='block mb-2 text-sm'>
-                                Email address
-                            </label>
+                            <label htmlFor='email' className='block mb-2 text-sm'></label>
+
+
                             <input
                                 onBlur={handleBlur}
                                 required
@@ -147,21 +174,7 @@ const AddProduct = () => {
                                 data-temp-mail-org='0'
                             />
                         </div>
-                        <div>
-                            <div className='flex justify-between mb-2'>
-                                <label htmlFor='password' className='text-sm'>
-                                    Password
-                                </label>
-                            </div>
-                            <input
-                                required
-                                type='password'
-                                name='password'
-                                id='password'
-                                placeholder='*******'
-                                className='w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-200 focus:outline-green-500 text-gray-900'
-                            />
-                        </div>
+
                     </div>
                     <div className='space-y-2'>
                         <div>
@@ -176,8 +189,8 @@ const AddProduct = () => {
                 </form>
 
 
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 
