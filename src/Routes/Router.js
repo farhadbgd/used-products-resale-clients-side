@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
+import CategoriesLayout from "../Layouts/CategoriesLayout"
 import Main from "../Layouts/Main"
+import CatergoriesProduct from "../Pages/CatergoriesProduct/CatergoriesProduct"
 import Login from "../Pages/Signup/Login"
 import Signup from "../Pages/Signup/Signup"
 import ErrorPage from "../Shared/ErrorPage"
@@ -22,6 +24,7 @@ const router = createBrowserRouter([
                 path: '/signup',
                 element: <Signup></Signup>,
             },
+
             // {
             //     path: '/all-homes',
             //     element: <AllHome />,
@@ -45,7 +48,22 @@ const router = createBrowserRouter([
             //     element: <Checkout />,
             // },
         ],
+
     },
+    {
+        path: '/categories',
+        element: <CategoriesLayout></CategoriesLayout>,
+        children: [
+            {
+                path: '/categories/:category',
+                element: <CatergoriesProduct></CatergoriesProduct>,
+                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.category}`),
+
+
+            }
+        ]
+    },
+
     // {
     //     path: '/dashboard',
     //     errorElement: <ErrorPage />,
