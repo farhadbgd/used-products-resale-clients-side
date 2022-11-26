@@ -51,10 +51,12 @@ const CatgoryCard = () => {
                             <div className="card w-96 bg-base-100 shadow-xl image-full ">
                                 <figure><img src={kids} alt="Shoes" /></figure>
                                 <div className="card-body">
-                                    <h2 className="card-title">{book.category}</h2>
-                                    <p>If a dog chews shoes whose shoes does he choose?</p>
+
+                                    <p>If you don’t like to read, you haven’t found the right book.<br></br>
+
+                                        <span>J.K. Rowling</span></p>
                                     <div className="card-actions ">
-                                        <button className="btn btn-primary w-full">{book.category}</button>
+                                        <button className="btn btn-base-content w-full">FIND BOOKS ON {book.category}</button>
                                     </div>
                                 </div>
                             </div>

@@ -14,8 +14,10 @@ const SingleProduct = () => {
         <div>
 
             <div className="card lg:card-side bg-base-100 shadow-xl">
-                <figure><img src={book.img} alt="Album" /></figure>
-                <div className="card-body">
+                <figure>
+                    <img src={book.img} alt="Album" />
+                </figure>
+                <div className="card-body ">
                     <h2 className="card-title">Category Name: {book.category}</h2>
                     <h2 className="card-title">Book Name: {book.title}</h2>
                     <h3 className="card-title">Resale Price: USD {book.resalePrice}</h3>
@@ -51,7 +53,7 @@ const SingleProduct = () => {
                     ></BookingModal>
                 }
             </div> */}
-        </div>
+        </div >
     );
 };
 

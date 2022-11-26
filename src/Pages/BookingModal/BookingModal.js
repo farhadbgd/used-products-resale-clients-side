@@ -11,43 +11,46 @@ const BookingModal = ({ booking, setBooking, selectedDate, book }) => {
     const handleBooking = event => {
         event.preventDefault();
         const form = event.target;
-        const slot = form.slot.value;
+
         const name = form.name.value;
+        const category = form.category.value;
+        const title = form.title.value;
         const email = form.email.value;
+        const resalePrice = form.resalePrice.value;
         const phone = form.phone.value;
         // [3, 4, 5].map((value, i) => console.log(value))
-        // const booking = {
-        //     // appointmentDate: date,
-        //     treatment: treatmentName,
-        //     patient: name,
-        //     slot,
-        //     email,
-        //     phone,
-        //     price
-        // }
-        console.log(email, phone, slot, name)
+        const booking = {
+            // appointmentDate: date,
+            category,
+            buyerName: name,
+            title,
+            email,
+            phone,
+            price: resalePrice
+        }
+        console.log(email, phone, name, category, title, resalePrice)
         // TODO: send data to the server
         // and once data is saved then close the modal 
         // and display success toast
-        // fetch('https://doctors-portal-server-rust.vercel.app/bookings', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(booking)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         if (data.acknowledged) {
-        //             setBooking(null);
-        //             toast.success('Booking confirmed');
-        //             // refetch();
-        //         }
-        //         else {
-        //             toast.error(data.message);
-        //         }
-        //     })
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data?.acknowledged) {
+                    setBooking(null);
+                    toast.success('Booking confirmed');
+                    // refetch();
+                }
+                else {
+                    toast.error(data.message);
+                }
+            })
 
 
     }
@@ -65,12 +68,12 @@ const BookingModal = ({ booking, setBooking, selectedDate, book }) => {
 
 
 
-                            <input name="name" type="text" defaultValue={book.category} placeholder="Your Name" className="input w-full input-bordered" />
-                            <input name="name" type="text" defaultValue={book.title} placeholder="Your Name" className="input w-full input-bordered" />
-                            <input name="name" type="text" defaultValue={book.resalePrice} placeholder="Your Name" className="input w-full input-bordered" />
-                            <input name="name" type="text" defaultValue={user?.displayName} placeholder="Your Name" className="input w-full input-bordered" />
-                            <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input w-full input-bordered" />
-                            <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" />
+                            <input name="category" type="text" defaultValue={book.category} placeholder="Catergory" className="input w-full input-bordered" required />
+                            <input name="title" type="text" defaultValue={book.title} placeholder="Book Name" className="input w-full input-bordered" required />
+                            <input name="resalePrice" type="text" defaultValue={book.resalePrice} placeholder="Price" className="input w-full input-bordered" required />
+                            <input name="name" type="text" defaultValue={user?.displayName} placeholder="Your Name" className="input w-full input-bordered" required />
+                            <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input w-full input-bordered" required />
+                            <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" required />
                             <br />
                             <input htmlFor="booking-modal" className='btn btn-accent w-full' type="submit" value="Submit" />
                             <label htmlFor="booking-modal" className="btn btn-sm  absolute right-2 top-2">Close</label>
