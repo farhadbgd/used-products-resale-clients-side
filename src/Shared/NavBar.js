@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 
 const NavBar = () => {
     const { user, logout } = useContext(AuthContext);
 
-
+    const navigate = useNavigate()
     const handleLogOut = () => {
         logout()
             .then(() => { })
             .catch(err => console.log(err));
+        navigate('/')
     }
 
     const menuItems = <React.Fragment>

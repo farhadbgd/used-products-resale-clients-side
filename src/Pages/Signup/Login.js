@@ -2,13 +2,15 @@ import React from 'react'
 import { useContext, useState } from "react"
 import toast from "react-hot-toast"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+
 import PrimaryButton from "../../Components/PrimaryButton/PrimaryButton"
 import Spinner from "../../Components/Spinner/Spinner"
 import { AuthContext } from "../../Contexts/AuthProvider"
 
 const Login = () => {
+
     const [userEmail, setUserEmail] = useState('')
-    const { signin, loading, setLoading, signInWithGoogle, resetPassword, createUser } =
+    const { signin, loading, setLoading, signInWithGoogle, createUser } =
         useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
@@ -33,19 +35,19 @@ const Login = () => {
                 setLoading(false)
             })
 
-        //     signin(email, password)
-        //         .then(result => {
-        //             toast.success('Login Successful.....!')
-        //             // Get Token
-        //             setLoading(false)
-        //             // setAuthToken(result.user)
-        //             navigate(from, { replace: true })
-        //         })
-        //         .catch(err => {
-        //             toast.error(err.message)
-        //             console.log(err)
-        //             setLoading(false)
-        //         })
+        signin(email, password)
+            .then(result => {
+                toast.success('Login Successful.....!')
+                // Get Token
+                setLoading(false)
+                // setAuthToken(result.user)
+                navigate(from, { replace: true })
+            })
+            .catch(err => {
+                toast.error(err.message)
+                console.log(err)
+                setLoading(false)
+            })
     }
 
     const handleGoogleSignin = () => {
@@ -104,21 +106,17 @@ const Login = () => {
                             />
                         </div>
                     </div>
-                    <div className="form-control">
-                        <p>Log in as</p>
-                        <label className="label cursor-pointer">
-                            <span className="label-text">Admin</span>
-                            <input type="radio" name="radio-10" className="radio checked:bg-red-500" checked />
-                        </label>
-                    </div>
+
                     <div className="form-control">
                         <label className="label cursor-pointer">
+                            <p>Log in as</p>
                             <span className="label-text">Seller</span>
                             <input type="radio" name="radio-10" className="radio checked:bg-red-500" checked />
                         </label>
                     </div>
                     <div className="form-control">
                         <label className="label cursor-pointer">
+                            <p>Log in as</p>
                             <span className="label-text">Buyer</span>
                             <input type="radio" name="radio-10" className="radio checked:bg-blue-500" checked />
                         </label>

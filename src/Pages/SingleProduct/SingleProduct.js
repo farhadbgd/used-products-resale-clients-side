@@ -6,9 +6,7 @@ import BookingModal from '../BookingModal/BookingModal';
 const SingleProduct = () => {
     const book = useLoaderData()
     const [booking, setBooking] = useState(null);
-    const tostHandler = () => {
-        toast.success('I have come back')
-    }
+
 
     return (
         <div>

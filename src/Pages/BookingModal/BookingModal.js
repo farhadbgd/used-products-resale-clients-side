@@ -2,10 +2,8 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
-const BookingModal = ({ booking, setBooking, selectedDate, book }) => {
-    // treatment is just another name of appointmentOptions with name, slots, _id
-    // const { name: treatmentName, slots, price } = booking;
-    // const date = format(selectedDate, 'PP');
+const BookingModal = ({ book }) => {
+
     const { user } = useContext(AuthContext);
 
     const handleBooking = event => {
@@ -18,9 +16,9 @@ const BookingModal = ({ booking, setBooking, selectedDate, book }) => {
         const email = form.email.value;
         const resalePrice = form.resalePrice.value;
         const phone = form.phone.value;
-        // [3, 4, 5].map((value, i) => console.log(value))
+
         const booking = {
-            // appointmentDate: date,
+
             category,
             buyerName: name,
             title,
@@ -28,10 +26,7 @@ const BookingModal = ({ booking, setBooking, selectedDate, book }) => {
             phone,
             price: resalePrice
         }
-        console.log(email, phone, name, category, title, resalePrice)
-        // TODO: send data to the server
-        // and once data is saved then close the modal 
-        // and display success toast
+
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers: {
@@ -43,9 +38,9 @@ const BookingModal = ({ booking, setBooking, selectedDate, book }) => {
             .then(data => {
                 console.log(data);
                 if (data?.acknowledged) {
-                    setBooking(null);
+
                     toast.success('Booking confirmed');
-                    // refetch();
+
                 }
                 else {
                     toast.error(data.message);

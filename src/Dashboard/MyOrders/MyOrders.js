@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CustomerRoute = () => {
+const MyOrders = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const CustomerRoute = () => {
     );
 };
 
-export default CustomerRoute;
+export default MyOrders;
