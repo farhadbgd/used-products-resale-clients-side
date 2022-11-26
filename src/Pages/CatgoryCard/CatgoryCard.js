@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CatergoriesProduct from '../CatergoriesProduct/CatergoriesProduct';
+import kids from '../../Assets/kids.avif'
 
 const CatgoryCard = () => {
 
@@ -48,12 +49,12 @@ const CatgoryCard = () => {
                     <Link to={`/categories/${book.category}`} key={book._id} onClick={() => categoryHandler(book.category)}>
                         < div className='flex mx-6'  >
                             <div className="card w-96 bg-base-100 shadow-xl image-full ">
-                                <figure><img src={book.img} alt="Shoes" /></figure>
+                                <figure><img src={kids} alt="Shoes" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title">{book.category}</h2>
                                     <p>If a dog chews shoes whose shoes does he choose?</p>
                                     <div className="card-actions ">
-                                        <button className="btn btn-primary w-full">Buy Now</button>
+                                        <button className="btn btn-primary w-full">{book.category}</button>
                                     </div>
                                 </div>
                             </div>

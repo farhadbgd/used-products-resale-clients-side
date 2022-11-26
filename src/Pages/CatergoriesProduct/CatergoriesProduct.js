@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 
+
 const CatergoriesProduct = () => {
     const books = useLoaderData()
     const singleProduct = (id) => {
@@ -33,8 +34,10 @@ const CatergoriesProduct = () => {
                             <Link to={`/category/${book._id}`} key={book._id} onClick={() => singleProduct(book._id)}><button className="btn btn-primary">Buy Now</button></Link>
                         </div>
                     </div>
+
                 </div>)
             }
+
         </div>
     );
 };
