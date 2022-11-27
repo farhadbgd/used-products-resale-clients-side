@@ -2,7 +2,6 @@ import React from 'react'
 import { useContext, useState } from "react"
 import toast from "react-hot-toast"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-
 import PrimaryButton from "../../Components/PrimaryButton/PrimaryButton"
 import Spinner from "../../Components/Spinner/Spinner"
 import { AuthContext } from "../../Contexts/AuthProvider"

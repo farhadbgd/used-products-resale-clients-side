@@ -9,6 +9,7 @@ import SingleProduct from "../Pages/SingleProduct/SingleProduct"
 import ErrorPage from "../Shared/ErrorPage"
 import PrivateRoute from "../Routes/PrivateRoute"
 import Home from "../Pages/Home/Home"
+import DashboardLayout from "../Layouts/DashboardLayout"
 
 const router = createBrowserRouter([
     {
@@ -52,16 +53,43 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>,
             },
-            {
-                path: '/dashboard',
-                element: <PrivateRoute><MyProducts></MyProducts></PrivateRoute>,
-            },
+            // {
+            //     path: '/dashboard',
+            //     element: <PrivateRoute><MyProducts></MyProducts></PrivateRoute>,
+            // },
 
         ]
 
+    },
+
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        errorElement: < ErrorPage />,
+        children: [
+            {
+                path: '/dashboard',
+                // element: <MyProducts></MyProducts>
+            },
+            // {
+            //     path: '/dashboard/allusers',
+            //     element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            // },
+            // {
+            //     path: '/dashboard/adddoctor',
+            //     element: <AdminRoute><AddDoctor></AddDoctor></AdminRoute>
+            // },
+            // {
+            //     path: '/dashboard/managedoctors',
+            //     element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
+            // },
+            // {
+            //     path: '/dashboard/payment/:id',
+            //     element: <Payment></Payment>,
+            //     loader: ({ params }) => fetch(`https://doctors-portal-server-rust.vercel.app/bookings/${params.id}`)
+            // },
+        ]
     }
-
-
 
 
 ])

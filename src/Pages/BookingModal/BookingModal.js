@@ -16,6 +16,7 @@ const BookingModal = ({ book }) => {
         const email = form.email.value;
         const resalePrice = form.resalePrice.value;
         const phone = form.phone.value;
+        const img = form.img.value;
 
         const booking = {
 
@@ -24,7 +25,8 @@ const BookingModal = ({ book }) => {
             title,
             email,
             phone,
-            price: resalePrice
+            price: resalePrice,
+            img
         }
 
         fetch('http://localhost:5000/bookings', {
@@ -60,11 +62,9 @@ const BookingModal = ({ book }) => {
 
                         <h3 className="text-lg font-bold">{book.title}</h3>
                         <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
-
-
-
                             <input name="category" type="text" defaultValue={book.category} placeholder="Catergory" className="input w-full input-bordered" required />
                             <input name="title" type="text" defaultValue={book.title} placeholder="Book Name" className="input w-full input-bordered" required />
+                            <input name="img" type="text" defaultValue={book.img} placeholder="Book Name" className="input w-full input-bordered" required />
                             <input name="resalePrice" type="text" defaultValue={book.resalePrice} placeholder="Price" className="input w-full input-bordered" required />
                             <input name="name" type="text" defaultValue={user?.displayName} placeholder="Your Name" className="input w-full input-bordered" required />
                             <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input w-full input-bordered" required />

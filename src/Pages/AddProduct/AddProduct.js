@@ -8,7 +8,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 
 const AddProduct = () => {
     const [product, setProduct] = useState({})
-    const { loading } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
     const handleSubmit = event => {
         event.preventDefault()
 
@@ -148,6 +148,40 @@ const AddProduct = () => {
                             />
                         </div>
                         <div>
+                            <label htmlFor='role' className='block mb-2 text-sm'></label>
+
+
+                            <input
+                                onBlur={handleBlur}
+                                required
+
+                                type='text'
+                                name='role'
+
+                                id='email'
+                                placeholder='write seller'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='email' className='block mb-2 text-sm'></label>
+
+
+                            <input
+                                onBlur={handleBlur}
+                                required
+
+                                type='email'
+                                name='email'
+
+                                id='email'
+                                placeholder='Enter Your Email Here'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
                             <label htmlFor='image' className='block mb-2 text-sm'> </label>
 
                             <input
@@ -159,21 +193,7 @@ const AddProduct = () => {
                                 accept='image/*'
                             />
                         </div>
-                        <div>
-                            <label htmlFor='email' className='block mb-2 text-sm'></label>
 
-
-                            <input
-                                onBlur={handleBlur}
-                                required
-                                type='email'
-                                name='email'
-                                id='email'
-                                placeholder='Enter Your Email Here'
-                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
-                                data-temp-mail-org='0'
-                            />
-                        </div>
 
                     </div>
                     <div className='space-y-2'>
