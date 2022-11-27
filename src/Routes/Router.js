@@ -10,6 +10,9 @@ import ErrorPage from "../Shared/ErrorPage"
 import PrivateRoute from "../Routes/PrivateRoute"
 import Home from "../Pages/Home/Home"
 import DashboardLayout from "../Layouts/DashboardLayout"
+import AdminBoard from "../Pages/AdminBoard/AdminBoard"
+import MyOrders from "../Pages/MyOrders/MyOrders"
+import Payment from "../Payment/Payment"
 
 const router = createBrowserRouter([
     {
@@ -53,10 +56,7 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>,
             },
-            // {
-            //     path: '/dashboard',
-            //     element: <PrivateRoute><MyProducts></MyProducts></PrivateRoute>,
-            // },
+
 
         ]
 
@@ -68,26 +68,22 @@ const router = createBrowserRouter([
         errorElement: < ErrorPage />,
         children: [
             {
-                path: '/dashboard',
-                // element: <MyProducts></MyProducts>
+                path: '/dashboard/admin',
+                element: <AdminBoard></AdminBoard>
             },
-            // {
-            //     path: '/dashboard/allusers',
-            //     element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
-            // },
-            // {
-            //     path: '/dashboard/adddoctor',
-            //     element: <AdminRoute><AddDoctor></AddDoctor></AdminRoute>
-            // },
-            // {
-            //     path: '/dashboard/managedoctors',
-            //     element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
-            // },
-            // {
-            //     path: '/dashboard/payment/:id',
-            //     element: <Payment></Payment>,
-            //     loader: ({ params }) => fetch(`https://doctors-portal-server-rust.vercel.app/bookings/${params.id}`)
-            // },
+            {
+                path: '/dashboard/seller',
+                element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/buyer',
+                element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
+            },
         ]
     }
 

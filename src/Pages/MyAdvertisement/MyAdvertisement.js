@@ -1,37 +1,27 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
-import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const MyAdvertisement = () => {
-    const { user } = useContext(AuthContext)
+
+    const { user } = useContext(AuthContext);
     const email = user?.email;
-    const [products, setProducts] = useState()
-    console.log(products)
 
-    const myProducts = (email) => {
+    const url = `http://localhost:5000/myproducts/${email}`;
 
-        fetch(`http://localhost:5000/myproducts/${email}`, {
-            method: 'GET',
-            // headers: {
-            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-            // }
-        })
-            .then(res => res.json())
-            .then(products => {
-                if (products.length > 0) {
-                    setProducts(products)
+    const { data: books = [] } = useQuery({
+        queryKey: ['books', user?.email],
+        queryFn: async () => {
+            const res = await fetch(url, {
+                // headers: {
+                //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+                // }
+            });
+            const data = await res.json();
+            return data;
+        }
+    })
 
-                }
-                else {
-                    toast.success('No products available')
-                }
-
-            })
-
-
-
-    };
 
     return (
 
@@ -40,11 +30,11 @@ const MyAdvertisement = () => {
                 email && <>
                     <div >
 
-                        <h2 className="text-2xl font-bold text-center "><Link onClick={() => myProducts(email)}><button className="btn btn-primary text-center my-10 w-full">My Advertisment</button></Link></h2>
+                        <h2 className="text-2xl font-bold text-center "><button className="btn btn-primary text-center my-10 w-full">My Advertisment</button></h2>
 
                         <div className='flex justify-center'>
                             {
-                                products?.map(book => <div key={book._id} className="card w-66 mx-10 bg-base-100 shadow-xl m-5">
+                                books?.map(book => <div key={book._id} className="card w-66 mx-10 bg-base-100 shadow-xl m-5">
                                     <figure className="px-5 pt-5">
                                         <div className="avatar">
                                             <div className="w-72 rounded">

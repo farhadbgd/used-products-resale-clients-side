@@ -1,43 +1,34 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const MyOrders = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     const email = user?.email;
-    const [products, setProducts] = useState()
-    console.log(products)
 
-    const myProducts = (email) => {
+    const url = `http://localhost:5000/myorders/${email}`;
 
-        fetch(`http://localhost:5000/myorders/${email}`, {
-            method: 'GET',
-            // headers: {
-            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-            // }
-        })
-            .then(res => res.json())
-            .then(products => {
-                if (products.length > 0) {
-                    setProducts(products)
+    const { data: bookings = [] } = useQuery({
+        queryKey: ['bookings', user?.email],
+        queryFn: async () => {
+            const res = await fetch(url, {
+                // headers: {
+                //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+                // }
+            });
+            const data = await res.json();
+            return data;
+        }
+    })
 
-                }
-                else {
-                    toast.success('No products available')
-                }
-
-            })
-
-    };
 
     return (
 
         <>
-            <div className='flex my-24'>
-                <div className='w-1/3'>
-                    <h2 className="text-2xl font-bold text-center my-10"><Link onClick={() => myProducts(email)}><button className="btn btn-primary text-center my-10">My Orders</button></Link></h2>
-                </div>
+            <div >
+
                 <div className="overflow-x-auto w-full">
                     <table className="table w-full">
                         <thead>
@@ -51,7 +42,7 @@ const MyOrders = () => {
                         </thead>
                         <tbody>
                             {
-                                products?.map((product, i) =>
+                                bookings?.map((product, i) =>
                                     <tr key={product._id}>
                                         <th>{i + 1}</th>
                                         <td>
@@ -69,9 +60,17 @@ const MyOrders = () => {
                                         </td>
                                         <td>{product.category}</td>
                                         <td>{product.price}</td>
+                                        {
+                                            product.price && !product.paid && <Link
+                                                to={`/dashboard/payment/${product._id}`}
+                                            >
+                                                <td><button className='btn btn-xs btn-danger'>Pay</button></td>
+                                            </Link>
+                                        }
+                                        {
+                                            product.price && product.paid && <span className='text-green-500'>Paid</span>
+                                        }
 
-                                        {/* <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
-                                        <td><button className='btn btn-xs btn-danger'>Pay</button></td>
 
                                     </tr>
 

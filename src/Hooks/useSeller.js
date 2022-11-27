@@ -5,11 +5,11 @@ const useSeller = email => {
     const [isAdminLoading, setIsAdminLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`https://doctors-portal-server-rust.vercel.app/users/admin/${email}`)
+            fetch(`http://localhost:5000/books/seller/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
-                    setIsSeller(data.isAdmin);
+                    setIsSeller(data.isSeller);
                     setIsAdminLoading(false);
                 })
         }
@@ -19,23 +19,4 @@ const useSeller = email => {
 
 export default useSeller;
 
-// import { useEffect, useState } from "react"
 
-// const useAdmin = email => {
-//     const [isAdmin, setIsAdmin] = useState(false);
-//     const [isAdminLoading, setIsAdminLoading] = useState(true);
-//     useEffect(() => {
-//         if (email) {
-//             fetch(`https://doctors-portal-server-rust.vercel.app/users/admin/${email}`)
-//                 .then(res => res.json())
-//                 .then(data => {
-//                     console.log(data);
-//                     setIsAdmin(data.isAdmin);
-//                     setIsAdminLoading(false);
-//                 })
-//         }
-//     }, [email])
-//     return [isAdmin, isAdminLoading]
-// }
-
-// export default useAdmin;

@@ -72,7 +72,7 @@ const AdminBoard = () => {
     // }
     return (
         <>
-            <div className='flex my-24'>
+            <div >
 
                 <div className="overflow-x-auto w-full">
                     <table className="table w-full">
