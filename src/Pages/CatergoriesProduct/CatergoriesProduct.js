@@ -22,7 +22,7 @@ const CatergoriesProduct = () => {
         <div className='flex flex-wrap mx-4 mt-4 lg:flex-row md:flex-col justify-center w-full' style={{ backgroundColor: 'orange' }}>
 
             {
-                books.map(book => <div key={book._id} className="card w-66 mx-10 bg-base-100 shadow-xl m-5">
+                books?.map(book => <div key={book._id} className="card w-66 mx-10 bg-base-100 shadow-xl m-5">
                     <figure className="px-5 pt-5">
                         <div className="avatar">
                             <div className="w-72 rounded">

@@ -1,10 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
-const MyProducts = () => {
+const MyAdvertisement = () => {
     const { user } = useContext(AuthContext)
     const email = user?.email;
     const [products, setProducts] = useState()
@@ -59,47 +58,43 @@ const MyProducts = () => {
     // }
 
     return (
-        <div className='flex my-48'>
-            <div className='w-1/3'>
-                <h2 className="text-2xl font-bold text-center my-10"><Link onClick={() => myProducts(email)}><button className="btn btn-primary text-center my-10">My Products</button></Link></h2>
-            </div>
+
+        <>
+            {
+                email && <>
+                    <div >
+
+                        <h2 className="text-2xl font-bold text-center "><Link onClick={() => myProducts(email)}><button className="btn btn-primary text-center my-10 w-full">My Advertisment</button></Link></h2>
+
+                        <div className='flex justify-center'>
+                            {
+                                products?.map(book => <div key={book._id} className="card w-66 mx-10 bg-base-100 shadow-xl m-5">
+                                    <figure className="px-5 pt-5">
+                                        <div className="avatar">
+                                            <div className="w-72 rounded">
+                                                <img src={book.img} alt='' />
+                                            </div>
+                                        </div>
+
+                                    </figure>
+                                    <div className="card-body items-center text-center">
+                                        <p >{book.category}</p>
+                                        <p >{book.title}</p>
 
 
-            <div className="overflow-x-auto w-full">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Catergory</th>
-                            <th>Book Name</th>
-                            <th>location</th>
-                            <th>Price</th>
+                                    </div>
 
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            products?.map((product, i) => <tr key={product._id}>
-                                <th>{i + 1}</th>
-                                <td>{product.category}</td>
-                                <td>{product.title}</td>
-                                <td>{product.location}</td>
-                                <td>{product.resalePrice}</td>
+                                </div>)
+                            }
+                        </div>
+                    </div>
 
-                                {/* <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
-                                <td><button className='btn btn-xs btn-danger'>Delete</button></td>
-                            </tr>
+                </>
+            }
 
-                            )
 
-                        }
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </>
     );
 };
 
-export default MyProducts;
+export default MyAdvertisement;
