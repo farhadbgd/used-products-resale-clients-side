@@ -1,8 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
+import ConfirmationModalBuyer from '../ConfirmationModal/ConfirmationModalBuyer';
 
 const AdminBoard = () => {
-    const { data: books = [] } = useQuery({
+    const [deletingSeller, setDeletingSeller] = useState(null);
+    const [deletingBuyer, setdeletingBuyer] = useState(null);
+
+    const closeModal = () => {
+        setDeletingSeller(null);
+    }
+    const closeModalBuyer = () => {
+        setdeletingBuyer(null);
+    }
+
+
+    const { data: books = [], isLoading, refetch } = useQuery({
         queryKey: ['books'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/books');
@@ -20,6 +34,42 @@ const AdminBoard = () => {
             return data;
         }
     });
+    const handleDeleteSeller = book => {
+
+        fetch(`http://localhost:5000/books/${book._id}`, {
+            method: 'DELETE',
+            // headers: {
+            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+            // }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`Seller ${book.name} deleted successfully`)
+                }
+            })
+    }
+    const handleDeleteBuyer = book => {
+
+        fetch(`http://localhost:5000/bookings/${book._id}`, {
+            method: 'DELETE',
+            // headers: {
+            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+            // }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`Buyer ${book.name} deleted successfully`)
+                }
+            })
+    }
+
+    // if (isLoading) {
+    //     return <Loading></Loading>
+    // }
     return (
         <>
             <div className='flex my-24'>
@@ -31,9 +81,7 @@ const AdminBoard = () => {
                                 <th>No.</th>
                                 <th>Seller Name</th>
                                 <th>Catergory</th>
-                                <th>Location</th>
                                 <th>Delete</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -41,14 +89,13 @@ const AdminBoard = () => {
                                 books?.map((book, i) =>
                                     <tr key={book._id}>
                                         <th>{i + 1}</th>
-
                                         <td>{book.name}</td>
                                         <td>{book.category}</td>
-                                        <td>{book.location}</td>
-
                                         {/* <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
-                                        <td><button className='btn btn-xs btn-danger'>Delete</button></td>
 
+                                        <td>
+                                            <label onClick={() => setDeletingSeller(book)} htmlFor="confirmation-modal" className='btn btn-xs btn-danger'>Delete</label>
+                                        </td>
                                     </tr>
 
                                 )
@@ -84,7 +131,10 @@ const AdminBoard = () => {
 
 
                                         {/* <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
-                                        <td><button className='btn btn-xs btn-danger'>Delete</button></td>
+
+                                        <td>
+                                            <label onClick={() => setdeletingBuyer(booking)} htmlFor="ConfirmationModalBuyer" className='btn btn-xs btn-danger'>Delete</label>
+                                        </td>
 
                                     </tr>
 
@@ -96,6 +146,28 @@ const AdminBoard = () => {
                     </table>
                 </div>
             </div>
+            {
+                deletingSeller && <ConfirmationModal
+                    title={`Are you sure you want to delete?`}
+                    message={`If you delete ${deletingSeller.name}. It cannot be undone.`}
+                    successAction={handleDeleteSeller}
+                    successButtonName="Delete"
+                    modalData={deletingSeller}
+                    closeModal={closeModal}
+                >
+                </ConfirmationModal>
+            }
+            {
+                deletingBuyer && <ConfirmationModalBuyer
+                    title={`Are you sure you want to delete?`}
+                    message={`If you delete ${deletingBuyer.buyerName}. It cannot be undone.`}
+                    successAction={handleDeleteBuyer}
+                    successButtonName="Delete"
+                    modalData={deletingBuyer}
+                    closeModal={closeModalBuyer}
+                >
+                </ConfirmationModalBuyer>
+            }
         </>
     );
 };
