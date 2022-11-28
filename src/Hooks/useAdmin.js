@@ -5,7 +5,7 @@ const useAdmin = email => {
     const [isAdminLoading, setIsAdminLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/books/admin/${email}`)
+            fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/books/admin/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

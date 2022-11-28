@@ -7,6 +7,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 // import { AuthContext } from '../../Contex/AuthProvider';
 
 const AddProduct = () => {
+    const navigate = useNavigate()
     const [product, setProduct] = useState({})
     const { user, loading } = useContext(AuthContext);
     const handleSubmit = event => {
@@ -32,7 +33,7 @@ const AddProduct = () => {
             })
             .catch(err => console.log(err))
 
-        fetch('http://localhost:5000/books', {
+        fetch('https://b612-used-products-resale-server-side-farhadbgd.vercel.app/books', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -43,6 +44,7 @@ const AddProduct = () => {
             .then(data => {
                 if (data.acknowledged === true) {
                     toast.success('Your product has been added successfully');
+                    navigate('/dashboard/seller')
                 }
                 event.target.reset();
             })
@@ -114,6 +116,32 @@ const AddProduct = () => {
                                 onBlur={handleBlur}
                                 required
                                 type='text'
+                                name='des'
+                                id='des'
+                                placeholder='Description'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='email' className='block mb-2 text-sm'></label>
+                            <input
+                                onBlur={handleBlur}
+                                required
+                                type='text'
+                                name='uses'
+                                id='uses'
+                                placeholder='How many years of purchase'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='email' className='block mb-2 text-sm'></label>
+                            <input
+                                onBlur={handleBlur}
+                                required
+                                type='text'
                                 name='location'
                                 id='location'
                                 placeholder='Enter Your Location'
@@ -160,6 +188,36 @@ const AddProduct = () => {
 
                                 id='email'
                                 placeholder='write seller'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='role' className='block mb-2 text-sm'></label>
+                            <input
+                                onBlur={handleBlur}
+                                required
+
+                                type='text'
+                                name='condition'
+
+                                id='condition'
+                                placeholder='Write Condition | Excellent | Goood | Fair'
+                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
+                                data-temp-mail-org='0'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='role' className='block mb-2 text-sm'></label>
+                            <input
+                                onBlur={handleBlur}
+                                required
+
+                                type='text'
+                                name='phone'
+
+                                id='phone'
+                                placeholder='Phone Number'
                                 className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900'
                                 data-temp-mail-org='0'
                             />

@@ -7,7 +7,7 @@ const MyAdvertisement = () => {
     const { user } = useContext(AuthContext);
     const email = user?.email;
 
-    const url = `http://localhost:5000/myproducts/${email}`;
+    const url = `https://b612-used-products-resale-server-side-farhadbgd.vercel.app/myproducts/${email}`;
 
     const { data: books = [] } = useQuery({
         queryKey: ['books', user?.email],

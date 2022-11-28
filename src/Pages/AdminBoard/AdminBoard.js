@@ -19,7 +19,7 @@ const AdminBoard = () => {
     const { data: books = [], isLoading, refetch } = useQuery({
         queryKey: ['books'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/books');
+            const res = await fetch('https://b612-used-products-resale-server-side-farhadbgd.vercel.app/books');
             const data = await res.json();
 
             return data;
@@ -28,7 +28,7 @@ const AdminBoard = () => {
     const { data: bookings = [] } = useQuery({
         queryKey: ['bookings'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/bookings');
+            const res = await fetch('https://b612-used-products-resale-server-side-farhadbgd.vercel.app/bookings');
             const data = await res.json();
 
             return data;
@@ -36,7 +36,7 @@ const AdminBoard = () => {
     });
     const handleDeleteSeller = book => {
 
-        fetch(`http://localhost:5000/books/${book._id}`, {
+        fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/books/${book._id}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -52,7 +52,7 @@ const AdminBoard = () => {
     }
     const handleDeleteBuyer = book => {
 
-        fetch(`http://localhost:5000/bookings/${book._id}`, {
+        fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/bookings/${book._id}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`

@@ -36,14 +36,14 @@ const router = createBrowserRouter([
             {
                 path: '/categories/:category',
                 element: <CatergoriesProduct></CatergoriesProduct>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.category}`),
+                loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/categories/${params.category}`),
 
 
             },
             {
                 path: '/category/:id',
                 element: <SingleProduct></SingleProduct>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
+                loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/category/${params.id}`),
 
 
             },
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/bookings/${params.id}`)
             },
         ]
     }

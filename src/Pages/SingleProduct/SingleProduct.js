@@ -33,24 +33,11 @@ const SingleProduct = () => {
                             booking={booking}
                             setBooking={setBooking}></BookingModal>
 
-                        {/* <button onClick={tostHandler} htmlFor="my-modal" className="btn btn-primary">Listen</button> */}
-
-
                     </div>
                 </div>
 
             </div>
-            {/* <div>
-                {
-                    booking &&
-                    <BookingModal
 
-                        booking={booking}
-                        setBooking={setBooking}
-
-                    ></BookingModal>
-                }
-            </div> */}
         </div >
     );
 };

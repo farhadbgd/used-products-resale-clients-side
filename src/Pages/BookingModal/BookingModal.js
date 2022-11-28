@@ -29,7 +29,7 @@ const BookingModal = ({ book }) => {
             img
         }
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://b612-used-products-resale-server-side-farhadbgd.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -41,7 +41,7 @@ const BookingModal = ({ book }) => {
                 console.log(data);
                 if (data?.acknowledged) {
 
-                    toast.success('Booking confirmed');
+                    toast.success('The book is booked successfully');
 
                 }
                 else {

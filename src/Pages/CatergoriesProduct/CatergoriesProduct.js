@@ -5,7 +5,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 const CatergoriesProduct = () => {
     const books = useLoaderData()
     const singleProduct = (id) => {
-        fetch(`http://localhost:5000/category/${id}`, {
+        fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/category/${id}`, {
             method: 'GET',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -29,15 +29,14 @@ const CatergoriesProduct = () => {
                                 <img src={book.img} alt='' />
                             </div>
                         </div>
-                        {/* <img src={book.img} alt="Shoes" className="rounded-xl" style={{ width: '18rem', height: '30rem' }} /> */}
-                        {/* <img src={book.img} alt="Shoes" className="rounded-xl" style={{ width: '18rem', height: '30rem' }}/> */}
+
                     </figure>
                     <div className="card-body items-center text-center">
-                        <p >{book.category}</p>
-                        <p >{book.title}</p>
+                        <p >Category: {book.category}</p>
+                        <p >Book Name: {book.title}</p>
 
                         <div className="card-actions">
-                            <Link to={`/category/${book._id}`} key={book._id} onClick={() => singleProduct(book._id)}><button className="btn btn-primary">Buy Now</button></Link>
+                            <Link to={`/category/${book._id}`} key={book._id} onClick={() => singleProduct(book._id)}><button className="btn btn-primary">Click for details</button></Link>
                         </div>
                     </div>
 

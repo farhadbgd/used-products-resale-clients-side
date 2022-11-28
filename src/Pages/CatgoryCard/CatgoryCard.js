@@ -9,7 +9,7 @@ const CatgoryCard = () => {
     const { data: books = [] } = useQuery({
         queryKey: ['books'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/category');
+            const res = await fetch('https://b612-used-products-resale-server-side-farhadbgd.vercel.app/category');
             const data = await res.json();
 
             return data;
@@ -17,7 +17,7 @@ const CatgoryCard = () => {
     });
 
     const categoryHandler = (category) => {
-        fetch(`http://localhost:5000/categories/${category}`, {
+        fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/categories/${category}`, {
             method: 'GET',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -26,17 +26,7 @@ const CatgoryCard = () => {
             .then(res => res.json())
             .then(books => console.log(books))
 
-        //     {
-        //     // console.log(books);
-        //     books.map(book => < CatergoriesProduct book={book} ></CatergoriesProduct >)
 
-        //     // < CatergoriesProduct books={books} ></CatergoriesProduct >
-        //     // if (data.modifiedCount > 0) {
-        //     //     toast.success('Make admin successful.')
-        //     //     refetch();
-        //     // }
-        // })
-        // console.log(category);
     };
 
 
@@ -44,7 +34,7 @@ const CatgoryCard = () => {
         <div className='flex justify-center my-5'>
             {
                 books.map(book =>
-                    // console.log(book.category)
+
 
                     <Link to={`/categories/${book.category}`} key={book._id} onClick={() => categoryHandler(book.category)}>
                         < div className='flex mx-6'  >
