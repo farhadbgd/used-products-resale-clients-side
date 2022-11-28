@@ -43,7 +43,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <SingleProduct></SingleProduct>,
+                element: <PrivateRoute><SingleProduct></SingleProduct></PrivateRoute>,
                 loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/category/${params.id}`),
 
 
