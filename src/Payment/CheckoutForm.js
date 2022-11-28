@@ -18,7 +18,7 @@ const CheckoutForm = ({ booking }) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                // authorization: `bearer ${localStorage.getItem('accessToken')}`
+
             },
             body: JSON.stringify({ price }),
         })
@@ -38,7 +38,7 @@ const CheckoutForm = ({ booking }) => {
             return;
         }
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card
         });
@@ -120,7 +120,7 @@ const CheckoutForm = ({ booking }) => {
                     }}
                 />
                 <button
-                    className='btn btn-sm mt-4 btn-primary'
+                    className='btn btn-sm mt-4 btn-primary w-full'
                     type="submit"
                     disabled={!stripe || !clientSecret || processing}>
                     Pay

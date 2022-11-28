@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import Loading from '../Components/Loading/Loading';
 import { AuthContext } from '../Contexts/AuthProvider';
 import useAdmin from '../Hooks/useAdmin';
 import useSeller from '../Hooks/useSeller';
@@ -8,12 +9,12 @@ import Footer from '../Shared/Footer';
 import NavBar from '../Shared/NavBar';
 
 const DashboardLayout = () => {
-    const { user } = useContext(AuthContext);
-    console.log(user);
+    const { user, isLoading } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
-    console.log(isAdmin);
     const [isSeller] = useSeller(user?.email)
-    console.log(isSeller);
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <div>
             <NavBar></NavBar>

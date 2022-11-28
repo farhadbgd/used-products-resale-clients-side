@@ -13,6 +13,7 @@ import DashboardLayout from "../Layouts/DashboardLayout"
 import AdminBoard from "../Pages/AdminBoard/AdminBoard"
 import MyOrders from "../Pages/MyOrders/MyOrders"
 import Payment from "../Payment/Payment"
+import Blog from "../Pages/Blog/Blog"
 
 const router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>,
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>,
             },
 
 

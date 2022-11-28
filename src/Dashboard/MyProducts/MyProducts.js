@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import Loading from '../../Components/Loading/Loading';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const MyProducts = () => {
-    const { user } = useContext(AuthContext);
+    const { user, isLoading } = useContext(AuthContext);
     const email = user?.email;
 
     const url = `https://b612-used-products-resale-server-side-farhadbgd.vercel.app/myproducts/${email}`;
@@ -21,7 +22,9 @@ const MyProducts = () => {
         }
     })
 
-
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <>

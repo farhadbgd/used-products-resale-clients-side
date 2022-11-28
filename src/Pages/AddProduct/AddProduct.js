@@ -1,15 +1,16 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Loading from '../../Components/Loading/Loading';
 import PrimaryButton from '../../Components/PrimaryButton/PrimaryButton';
 import Spinner from '../../Components/Spinner/Spinner';
 import { AuthContext } from '../../Contexts/AuthProvider';
-// import { AuthContext } from '../../Contex/AuthProvider';
+
 
 const AddProduct = () => {
     const navigate = useNavigate()
     const [product, setProduct] = useState({})
-    const { user, loading } = useContext(AuthContext);
+    const { user, isLoading } = useContext(AuthContext);
     const handleSubmit = event => {
         event.preventDefault()
 
@@ -57,7 +58,9 @@ const AddProduct = () => {
         console.log(newProduct)
         setProduct(newProduct);
     }
-
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <div className='flex justify-center items-center pt-8'>
             <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -260,7 +263,7 @@ const AddProduct = () => {
                                 type='submit'
                                 classes='w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100'
                             >
-                                {loading ? <Spinner /> : 'Submit to add Product'}
+                                {isLoading ? <Spinner /> : 'Submit to add Product'}
                             </PrimaryButton>
                         </div>
                     </div>

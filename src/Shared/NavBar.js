@@ -16,11 +16,12 @@ const NavBar = () => {
     const menuItems = <React.Fragment>
 
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/addproduct">Add Product</Link></li>
 
-        <li><Link to="/about">About</Link></li>
+
+        <li><Link to="/blog">Blog</Link></li>
         {user?.uid ?
             <>
+                <li><Link to="/addproduct">Add Product</Link></li>
                 <li><Link to="/dashboard">Dashboard</Link></li>
                 <li><button onClick={handleLogOut}>Log out</button></li>
             </>
@@ -45,7 +46,7 @@ const NavBar = () => {
                         <img style={{ color: 'red', fontSize: '25px' }} src="../../public/logo192.png" alt='' />
                     </div>
                     <div>
-                        <Link to="/" className="btn btn-ghost normal-case text-xl">Book World</Link>
+                        <Link style={{ fontSize: '25px', color: 'orange', fontWeight: 'bold' }} to="/" className="btn btn-ghost normal-case text-xl">Book World</Link>
                     </div>
                 </div>
 

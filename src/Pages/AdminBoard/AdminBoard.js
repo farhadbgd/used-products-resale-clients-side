@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import Loading from '../../Components/Loading/Loading';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import ConfirmationModalBuyer from '../ConfirmationModal/ConfirmationModalBuyer';
 
@@ -67,9 +68,9 @@ const AdminBoard = () => {
             })
     }
 
-    // if (isLoading) {
-    //     return <Loading></Loading>
-    // }
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <>
             <div >

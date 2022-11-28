@@ -4,18 +4,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PrimaryButton from '../../Components/PrimaryButton/PrimaryButton';
 import Spinner from '../../Components/Spinner/Spinner';
 import { AuthContext } from '../../Contexts/AuthProvider';
-// import { AuthContext } from '../../Contex/AuthProvider';
+
 
 const Signup = () => {
     const { createUser, updateUserProfile, verifyEmail, setLoading, signInWithGoogle, loading } = useContext(AuthContext);
-    // const {
-    //     createUser,
-    //     updateUserProfile,
-    //     verifyEmail,
-    //     loading,
-    //     setLoading,
-    //     signInWithGoogle,
-    // } = useContext(AuthContext)
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -44,7 +36,7 @@ const Signup = () => {
                 // Create User
                 createUser(email, password)
                     .then(result => {
-                        // setAuthToken(result.user)
+
                         updateUserProfile(name, imageData.data.display_url)
                             .then(
                                 verifyEmail().then(() => {
@@ -69,7 +61,7 @@ const Signup = () => {
     const handleGoogleSignin = () => {
         signInWithGoogle().then(result => {
             console.log(result.user)
-            // setAuthToken(result.user)
+
             setLoading(false)
             navigate(from, { replace: true })
         })
