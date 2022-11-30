@@ -6,8 +6,6 @@ import BookingModal from '../BookingModal/BookingModal';
 const SingleProduct = () => {
     const book = useLoaderData()
     const [booking, setBooking] = useState(null);
-
-
     return (
         <div>
 
@@ -20,10 +18,16 @@ const SingleProduct = () => {
                     <h2 className="card-title">Book Name: {book.title}</h2>
                     <h3 className="card-title">Resale Price: USD {book.resalePrice}</h3>
                     <h2 className="card-title">Original Price: USD {book.originalPrice}</h2>
-                    <h2 className="card-title">Your of Used: {book.uses} Year</h2>
+                    <h2 className="card-title">Year of Used: {book.uses} Year</h2>
                     <div className="form-control">
                         <label className="cursor-pointer label">
-                            <h2 className="card-title"><span className="card-title">Seller Name: {book.name}</span><input type="checkbox" checked className="checkbox checkbox-info" />{book.status}</h2>
+                            <h2 className="card-title"><span className="card-title">Seller Name: {book.name}
+
+                                <td>{book?.status === 'verified' && <input type="checkbox" checked className="checkbox checkbox-info" />
+                                }</td>
+
+
+                            </span></h2>
                         </label>
                     </div>
 

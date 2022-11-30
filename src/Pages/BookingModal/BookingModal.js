@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../Contexts/AuthProvider';
@@ -60,12 +61,12 @@ const BookingModal = ({ book }) => {
                 <div className="modal">
                     <div className="modal-box relative">
 
-                        <h3 className="text-lg font-bold">{book.title}</h3>
+                        <h3 className="text-lg font-bold">{book?.title}</h3>
                         <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
-                            <input name="category" type="text" defaultValue={book.category} placeholder="Catergory" className="input w-full input-bordered" required />
-                            <input name="title" type="text" defaultValue={book.title} placeholder="Book Name" className="input w-full input-bordered" required />
-                            <input name="img" type="text" defaultValue={book.img} placeholder="Book Name" className="input w-full input-bordered" required />
-                            <input name="resalePrice" type="text" defaultValue={book.resalePrice} placeholder="Price" className="input w-full input-bordered" required />
+                            <input name="category" type="text" defaultValue={book?.category} placeholder="Catergory" className="input w-full input-bordered" required />
+                            <input name="title" type="text" defaultValue={book?.title} placeholder="Book Name" className="input w-full input-bordered" required />
+                            <input name="img" type="text" defaultValue={book?.img} placeholder="Book Name" className="input w-full input-bordered" required />
+                            <input name="resalePrice" type="text" defaultValue={book?.resalePrice} placeholder="Price" className="input w-full input-bordered" required />
                             <input name="name" type="text" defaultValue={user?.displayName} placeholder="Your Name" className="input w-full input-bordered" required />
                             <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input w-full input-bordered" required />
                             <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" required />

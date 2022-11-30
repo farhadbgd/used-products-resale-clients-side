@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+
 
 
 const CatergoriesProduct = () => {
@@ -18,6 +19,11 @@ const CatergoriesProduct = () => {
         // console.log(id);
     };
 
+
+
+
+
+
     return (
         <div className='flex flex-wrap mx-4 mt-4 lg:flex-row md:flex-col justify-center w-full' style={{ backgroundColor: 'orange' }}>
 
@@ -34,7 +40,8 @@ const CatergoriesProduct = () => {
                     <div className="card-body items-center text-center">
                         <p >Category: {book.category}</p>
                         <p >Book Name: {book.title}</p>
-
+                        <p >Seller Name: {book.name} <span>{book?.status === 'verified' && <input type="checkbox" checked className="checkbox checkbox-info" />
+                        }</span></p>
                         <div className="card-actions">
                             <Link to={`/category/${book._id}`} key={book._id} onClick={() => singleProduct(book._id)}><button className="btn btn-primary">Click for details</button></Link>
                         </div>

@@ -67,7 +67,21 @@ const AdminBoard = () => {
                 }
             })
     }
-
+    const handleMakeVerify = (id) => {
+        fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/books/${id}`, {
+            method: "PUT",
+            // headers: {
+            //     authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            // },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.modifiedCount > 0) {
+                    toast.success("Make verified successful.");
+                    refetch();
+                }
+            });
+    };
     if (isLoading) {
         return <Loading></Loading>
     }
@@ -92,7 +106,7 @@ const AdminBoard = () => {
                                         <th>{i + 1}</th>
                                         <td>{book.name}</td>
                                         <td>{book.category}</td>
-                                        {/* <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
+                                        <td>{book?.status !== 'verified' && <button onClick={() => handleMakeVerify(book._id)} className='btn btn-xs btn-primary'>Verify</button>}</td>
 
                                         <td>
                                             <label onClick={() => setDeletingSeller(book)} htmlFor="confirmation-modal" className='btn btn-xs btn-danger'>Delete</label>
@@ -131,7 +145,7 @@ const AdminBoard = () => {
                                         <td>{booking.category}</td>
 
 
-                                        {/* <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
+
 
                                         <td>
                                             <label onClick={() => setdeletingBuyer(booking)} htmlFor="ConfirmationModalBuyer" className='btn btn-xs btn-danger'>Delete</label>

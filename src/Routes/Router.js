@@ -43,7 +43,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <PrivateRoute><SingleProduct></SingleProduct></PrivateRoute>,
+                element: <SingleProduct></SingleProduct>,
+
                 loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-farhadbgd.vercel.app/category/${params.id}`),
 
 
@@ -69,7 +70,8 @@ const router = createBrowserRouter([
 
     {
         path: '/dashboard',
-        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        element: <DashboardLayout></DashboardLayout>,
+        // element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         errorElement: < ErrorPage />,
         children: [
             {
